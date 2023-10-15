@@ -6,10 +6,15 @@ require (
 	github.com/cstockton/go-conv v1.0.0
 	github.com/gin-gonic/gin v1.9.1
 	github.com/golang-jwt/jwt v3.2.2+incompatible
+	github.com/gorilla/context v1.1.1
+	github.com/gorilla/sessions v1.2.1
 	github.com/gorilla/websocket v1.5.0
 	github.com/phuhao00/spoor v1.0.8
+	github.com/quasoft/memstore v0.0.0-20191010062613-2bce066d2b0b
 	github.com/unrolled/secure v1.13.0
+	github.com/wader/gormstore/v2 v2.0.3
 	go.uber.org/atomic v1.11.0
+	gorm.io/gorm v1.25.5
 )
 
 require (
@@ -21,6 +26,9 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.14.0 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
+	github.com/gorilla/securecookie v1.1.1 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
