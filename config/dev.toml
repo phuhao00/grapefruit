@@ -1,0 +1,26 @@
+[redis]
+host="127.0.0.1"
+user="grapefruit"
+pwd="grapefruit"
+crt=""
+[mongo]
+
+[es]
+endpoint=""
+credential_key=""
+credential_secret=""
+#dev
+user=""
+pwd=""
+[postgresql]
+#docker run --name grapefruit -e POSTGRES_PASSWORD=grapefruit -d -p 5432:5432 postgres
+#su postgres
+#createuser -P -s -e grapefruit
+#create database grapefruit owner=grapefruit;
+host="127.0.0.1"
+port="5432"
+database="grapefruit"
+user="grapefruit"
+pwd="grapefruit"
+
+

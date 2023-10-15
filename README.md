@@ -9,6 +9,7 @@ Project grapefruit is a web backend ,this project can be use in chat gpt project
 -  Websocket.
 -  EventSource.
 -  Http.
+-  Chat-GPT
 
 ## Technology Stack
 
