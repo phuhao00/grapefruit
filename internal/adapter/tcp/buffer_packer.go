@@ -1,0 +1,175 @@
+package tcp
+
+import (
+	"encoding/binary"
+	"errors"
+	"fmt"
+	"io"
+	"math"
+)
+
+type BufferPacker struct {
+	lenMsgLen   int32
+	minMsgLen   uint32
+	maxMsgLen   uint32
+	receiveBuff *ByteBuffer
+	sendBuff    *ByteBuffer
+	byteOrder   binary.ByteOrder
+}
+
+func newInActionPacker() *BufferPacker {
+	msgParser := &BufferPacker{
+		lenMsgLen:   4,
+		minMsgLen:   2,
+		maxMsgLen:   2 * 1024 * 1024,
+		receiveBuff: NewByteBuffer(),
+		sendBuff:    NewByteBuffer(),
+		byteOrder:   binary.LittleEndian,
+	}
+	return msgParser
+}
+
+// SetMsgLen It's dangerous to call the method on reading or writing
+func (p *BufferPacker) SetMsgLen(lenMsgLen int32, minMsgLen uint32, maxMsgLen uint32) {
+	if lenMsgLen == 1 || lenMsgLen == 2 || lenMsgLen == 4 {
+		p.lenMsgLen = lenMsgLen
+	}
+	if minMsgLen != 0 {
+		p.minMsgLen = minMsgLen
+	}
+	if maxMsgLen != 0 {
+		p.maxMsgLen = maxMsgLen
+	}
+
+	var max uint32
+	switch p.lenMsgLen {
+	case 1:
+		max = math.MaxUint8
+	case 2:
+		max = math.MaxUint16
+	case 4:
+		max = math.MaxUint32
+	}
+	if p.minMsgLen > max {
+		p.minMsgLen = max
+	}
+	if p.maxMsgLen > max {
+		p.maxMsgLen = max
+	}
+}
+
+// Read goroutine safe
+func (p *BufferPacker) Read(conn *Session) ([]byte, error) {
+
+	p.receiveBuff.EnsureWritableBytes(p.lenMsgLen)
+
+	readLen, err := io.ReadFull(conn, p.receiveBuff.WriteBuff()[:p.lenMsgLen])
+	// read len
+	if err != nil {
+		//log.Error(context.Background(), err.Error())
+		return nil, err
+	}
+	p.receiveBuff.WriteBytes(int32(readLen))
+
+	// parse len
+	var msgLen uint32
+	switch p.lenMsgLen {
+	case 2:
+		msgLen = uint32(p.receiveBuff.ReadInt16())
+	case 4:
+		msgLen = uint32(p.receiveBuff.ReadInt32())
+	}
+
+	// check len
+	if msgLen > p.maxMsgLen {
+		return nil, errors.New("message too long")
+	} else if msgLen < p.minMsgLen {
+		return nil, errors.New("message too short")
+	}
+
+	p.receiveBuff.EnsureWritableBytes(int32(msgLen))
+
+	rLen, err := io.ReadFull(conn, p.receiveBuff.WriteBuff()[:msgLen])
+	if err != nil {
+		return nil, fmt.Errorf("%v msgLen:%v readLen:%v", err, msgLen, rLen)
+	}
+	p.receiveBuff.WriteBytes(int32(rLen))
+
+	/*
+		// 保留了2字节flag 暂时未处理
+		var flag uint16
+		flag = uint16(p.receiveBuff.ReadInt16())
+	*/
+	//p.receiveBuff.Skip(2) // 跳过2字节保留字段
+
+	// 减去2字节的保留字段长度
+	//return p.receiveBuff.NextBytes(int32(msgLen - 2)), nil
+	return p.receiveBuff.NextBytes(int32(msgLen)), nil
+
+}
+
+// goroutine safe
+func (p *BufferPacker) Write(conn *Session, buff ...byte) error {
+	// get len
+	msgLen := uint32(len(buff))
+
+	// check len
+	if msgLen > p.maxMsgLen {
+		return errors.New("message too long")
+	} else if msgLen < p.minMsgLen {
+		return errors.New("message too short")
+	}
+
+	// write len
+	switch p.lenMsgLen {
+	case 2:
+		p.sendBuff.AppendInt16(int16(msgLen))
+	case 4:
+		p.sendBuff.AppendInt32(int32(msgLen))
+	}
+
+	p.sendBuff.Append(buff)
+	// write data
+	writeBuff := p.sendBuff.ReadBuff()[:p.sendBuff.Length()]
+
+	_, err := conn.Write(writeBuff)
+
+	p.sendBuff.Reset()
+
+	return err
+}
+
+func (p *BufferPacker) reset() {
+	p.receiveBuff = NewByteBuffer()
+	p.sendBuff = NewByteBuffer()
+}
+
+func (p *BufferPacker) Pack(msgID uint64, msg *Message) ([]byte, error) {
+	//data, err := json.Marshal(msg)
+	//if err != nil {
+	//	return data, err
+	//}
+	// 4byte = len(flag)[2byte] + len(msgID)[2byte]
+	buf := make([]byte, len(msg.Data))
+	if p.byteOrder == binary.LittleEndian {
+		//binary.LittleEndian.PutUint16(buf[0:2], 0)
+		//binary.LittleEndian.PutUint64(buf[2:], msgID)
+	} else {
+		//binary.BigEndian.PutUint16(buf[0:2], 0)
+		//binary.BigEndian.PutUint64(buf[2:], msgID)
+	}
+	copy(buf[:], msg.Data)
+	return buf, nil
+}
+
+func (p *BufferPacker) Unpack(data []byte) (*Message, error) {
+	if len(data) < 2 {
+		return nil, errors.New("protobuf data too short")
+	}
+	//msgID := p.byteOrder.Uint16(data[:])
+	msg := &Message{
+		//Command: uint64(msgID),
+		Data: data[:],
+	}
+	return msg, nil
+}
