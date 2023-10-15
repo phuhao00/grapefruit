@@ -1,5 +1,7 @@
 [redis]
+#docker run --name grapefruit-redis -d -p 6379:6379 redis redis-server --save 60 1  --loglevel warning
 host="127.0.0.1"
+port="6379"
 user="grapefruit"
 pwd="grapefruit"
 crt=""
