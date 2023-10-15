@@ -1,6 +1,6 @@
 # Project Grapefruit
 
-Project Web grapefruit is a web backend ,this project can be use in chat gpt project 
+Project grapefruit is a web backend ,this project can be use in chat gpt project 
 
 ## Features
 
