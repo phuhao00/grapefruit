@@ -5,6 +5,7 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	_ "grapefruit/docs"
+	"grapefruit/internal/adapter/routing/middleware"
 	"grapefruit/internal/app/usecase/login"
 	"net/http"
 )
@@ -19,7 +20,7 @@ func Register(engine *gin.Engine) {
 		context.JSON(http.StatusOK, "I'm healthy")
 	})
 	//
-	//engine.Use(middleware.WithJWT(), middleware.WithCors())
+	engine.Use(middleware.WithCors())
 	//
 	engine.POST("api/login", login.Login)
 	engine.POST("api/register", login.UserRegister)

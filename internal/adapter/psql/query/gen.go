@@ -16,34 +16,49 @@ import (
 )
 
 var (
-	Q    = new(Query)
-	User *user
+	Q       = new(Query)
+	Company *company
+	Job     *job
+	Resume  *resume
+	User    *user
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
+	Company = &Q.Company
+	Job = &Q.Job
+	Resume = &Q.Resume
 	User = &Q.User
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:   db,
-		User: newUser(db, opts...),
+		db:      db,
+		Company: newCompany(db, opts...),
+		Job:     newJob(db, opts...),
+		Resume:  newResume(db, opts...),
+		User:    newUser(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	User user
+	Company company
+	Job     job
+	Resume  resume
+	User    user
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:   db,
-		User: q.User.clone(db),
+		db:      db,
+		Company: q.Company.clone(db),
+		Job:     q.Job.clone(db),
+		Resume:  q.Resume.clone(db),
+		User:    q.User.clone(db),
 	}
 }
 
@@ -57,18 +72,27 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:   db,
-		User: q.User.replaceDB(db),
+		db:      db,
+		Company: q.Company.replaceDB(db),
+		Job:     q.Job.replaceDB(db),
+		Resume:  q.Resume.replaceDB(db),
+		User:    q.User.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	User IUserDo
+	Company ICompanyDo
+	Job     IJobDo
+	Resume  IResumeDo
+	User    IUserDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		User: q.User.WithContext(ctx),
+		Company: q.Company.WithContext(ctx),
+		Job:     q.Job.WithContext(ctx),
+		Resume:  q.Resume.WithContext(ctx),
+		User:    q.User.WithContext(ctx),
 	}
 }
 

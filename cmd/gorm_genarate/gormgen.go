@@ -28,6 +28,9 @@ func main() {
 
 	g.ApplyBasic(
 		g.GenerateModel("user"),
+		g.GenerateModel("company"),
+		g.GenerateModel("resume"),
+		g.GenerateModel("job"),
 	)
 	// Generate the code
 	g.Execute()
