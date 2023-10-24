@@ -256,7 +256,7 @@ func (s *service) call(server *Server, sending *sync.Mutex, wg *sync.WaitGroup, 
 		}
 		server.sendResponse(sending, req, replyv.Interface(), codec, errmsg)
 		if errInter != nil {
-			fmt.Println("err:", errmsg)
+			fmt.Println("errwrap:", errmsg)
 			break
 		}
 	}

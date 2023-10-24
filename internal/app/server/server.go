@@ -3,6 +3,10 @@ package server
 import (
 	"context"
 	"github.com/gin-gonic/gin"
+	"github.com/phuhao00/spoor"
+	"github.com/phuhao00/spoor/logger"
+	"grapefruit/internal/adapter/psql"
+	"grapefruit/internal/adapter/routing"
 	"grapefruit/internal/app/service"
 	"grapefruit/internal/app/service/chat"
 	"grapefruit/kit/log"
@@ -17,6 +21,7 @@ type Server struct {
 
 func NewServer() *Server {
 	r := gin.Default()
+	routing.Register(r)
 	eventSource := chat.NewEventSource()
 	return &Server{
 		Router:      r,
@@ -25,21 +30,30 @@ func NewServer() *Server {
 }
 
 func (s *Server) Init() {
-
+	psql.InitGormDB()
+	logger.SetLogging(&logger.LoggingSetting{
+		Dir:          "./log",
+		Level:        int(spoor.DEBUG),
+		Prefix:       "",
+		WriterOption: nil,
+	})
 }
 
 func (s *Server) Run() {
 	s.Init()
+
 	go func() {
 		err := s.Router.Run(":8080")
 		if err != nil {
-			log.Error("[Run] err:%v", err.Error())
+			log.Error("[Run] errwrap:%v", err.Error())
 		}
 	}()
-	go func() {
-		s.chatService.Start()
-		defer s.chatService.Stop()
-	}()
+	//go func() {
+	//	s.chatService.Start()
+	//	defer s.chatService.Stop()
+	//}()
+
+	s.WaitSignal()
 }
 
 func (s *Server) WaitSignal() {
@@ -49,7 +63,7 @@ func (s *Server) WaitSignal() {
 			defer cancel()
 
 			if err := s.Shutdown(ctx); err != nil {
-				log.Error("server shutdown err:%s", err.Error())
+				log.Error("server shutdown errwrap:%s", err.Error())
 			}
 		})
 }

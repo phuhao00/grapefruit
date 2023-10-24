@@ -1,8 +1,13 @@
-package err
+package errwrap
 
 type ErrorMessage struct {
 	Code int    `json:"code"`
 	Msg  string `json:"msg"`
+}
+
+type ErrorMessageWithResponse struct {
+	Code int         `json:"code"`
+	Msg  interface{} `json:"msg"`
 }
 
 func (e *ErrorMessage) SetMsg(errMsg string, code int) {
@@ -46,5 +51,12 @@ func ErrorMsg(msg string, code int) ErrorMessage {
 	return ErrorMessage{
 		Code: code,
 		Msg:  msg,
+	}
+}
+
+func DefaultSuccessWithResponse(data interface{}) *ErrorMessageWithResponse {
+	return &ErrorMessageWithResponse{
+		Code: 200,
+		Msg:  data,
 	}
 }

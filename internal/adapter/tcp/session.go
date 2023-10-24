@@ -106,11 +106,11 @@ func (c *Session) HandleRead() {
 	for {
 		data, err := c.msgParser.Read(c)
 		if err != nil {
-			//log.Error("[HandleRead]read message error: %v", err)
+			//log.Error("[HandleRead]read message error: %v", errwrap)
 			time.Sleep(200 * time.Millisecond)
 			continue
 		}
-		//log.Info("[HandleRead] read err:", err.Error())
+		//log.Info("[HandleRead] read errwrap:", errwrap.Error())
 		//break
 		message, err := c.msgParser.Unpack(data)
 		if err != nil {

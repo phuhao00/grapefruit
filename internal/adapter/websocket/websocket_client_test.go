@@ -35,7 +35,7 @@ func TestGetAIResponse(t *testing.T) {
 		for {
 			_, message, err := c.ReadMessage()
 			if err != nil {
-				log.Println("client read err:", err)
+				log.Println("client read errwrap:", err)
 				return
 			}
 			log.Printf("client recv msg: %s", message)

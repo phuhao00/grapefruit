@@ -66,7 +66,7 @@ func (p *BufferPacker) Read(conn *Session) ([]byte, error) {
 	readLen, err := io.ReadFull(conn, p.receiveBuff.WriteBuff()[:p.lenMsgLen])
 	// read len
 	if err != nil {
-		//log.Error(context.Background(), err.Error())
+		//log.Error(context.Background(), errwrap.Error())
 		return nil, err
 	}
 	p.receiveBuff.WriteBytes(int32(readLen))
@@ -145,9 +145,9 @@ func (p *BufferPacker) reset() {
 }
 
 func (p *BufferPacker) Pack(msgID uint64, msg *Message) ([]byte, error) {
-	//data, err := json.Marshal(msg)
-	//if err != nil {
-	//	return data, err
+	//data, errwrap := json.Marshal(msg)
+	//if errwrap != nil {
+	//	return data, errwrap
 	//}
 	// 4byte = len(flag)[2byte] + len(msgID)[2byte]
 	buf := make([]byte, len(msg.Data))

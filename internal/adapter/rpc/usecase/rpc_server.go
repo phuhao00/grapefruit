@@ -75,24 +75,24 @@ func (srv *Server) Run() {
 		// Try to open keepalive for tcp.
 		err = conn.SetKeepAlive(true)
 		if err != nil {
-			log.Error("err:%v", err.Error())
+			log.Error("errwrap:%v", err.Error())
 		}
 		err = conn.SetKeepAlivePeriod(1 * time.Minute)
 		if err != nil {
-			log.Error("err:%v", err.Error())
+			log.Error("errwrap:%v", err.Error())
 		}
 		// disable Nagle algorithm.
 		err = conn.SetNoDelay(true)
 		if err != nil {
-			log.Error("err:%v", err.Error())
+			log.Error("errwrap:%v", err.Error())
 		}
 		err = conn.SetWriteBuffer(128 * 1024)
 		if err != nil {
-			log.Error("err:%v", err.Error())
+			log.Error("errwrap:%v", err.Error())
 		}
 		err = conn.SetReadBuffer(128 * 1024)
 		if err != nil {
-			log.Error("err:%v", err.Error())
+			log.Error("errwrap:%v", err.Error())
 		}
 		go jsonrpc.ServeConn(conn)
 

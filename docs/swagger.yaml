@@ -1,0 +1,121 @@
+definitions:
+  do.LoginReq:
+    properties:
+      name:
+        type: string
+      pwd:
+        type: string
+    type: object
+  do.LoginRsp:
+    type: object
+  do.RegisterReq:
+    properties:
+      name:
+        type: string
+      pwd:
+        type: string
+    type: object
+  do.RegisterRsp:
+    type: object
+info:
+  contact: {}
+  title: grapefruit
+paths:
+  /api/login:
+    post:
+      consumes:
+      - application/json
+      description: user login
+      parameters:
+      - description: login success response
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/do.LoginReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/do.LoginRsp'
+      security:
+      - JWT: []
+      tags:
+      - user
+  /api/register:
+    post:
+      consumes:
+      - application/json
+      description: user register
+      parameters:
+      - description: register success response
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/do.RegisterReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/do.RegisterRsp'
+      security:
+      - JWT: []
+      tags:
+      - user
+  /dev/api/login:
+    post:
+      consumes:
+      - application/json
+      description: user login
+      parameters:
+      - description: login success response
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/do.LoginReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/do.LoginRsp'
+      security:
+      - JWT: []
+      tags:
+      - user
+  /dev/api/register:
+    post:
+      consumes:
+      - application/json
+      description: user register
+      parameters:
+      - description: register success response
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/do.RegisterReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/do.RegisterRsp'
+      security:
+      - JWT: []
+      tags:
+      - user
+securityDefinitions:
+  JWT:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

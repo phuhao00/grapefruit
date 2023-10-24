@@ -98,14 +98,14 @@ func (s *Server) Run() {
 		if atomic.LoadInt64(&s.counter) >= int64(s.MaxConnNum) {
 			err = conn.Close()
 			if err != nil {
-				log.Error("[Run] err:%v", err.Error())
+				log.Error("[Run] errwrap:%v", err.Error())
 			}
 			log.Info("[Run] too many connections %v", atomic.LoadInt64(&s.counter))
 			continue
 		}
 		tcpSession, err := NewSession(conn, s.connBuffSize)
 		if err != nil {
-			log.Error("[Run] err:%v", err)
+			log.Error("[Run] errwrap:%v", err)
 			return
 		}
 		tcpSession.MessageHandler = ServerHandleMessage

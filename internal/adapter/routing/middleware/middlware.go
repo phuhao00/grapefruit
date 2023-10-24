@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/unrolled/secure"
-	errMsg "grapefruit/internal/domain/err"
+	errMsg "grapefruit/internal/domain/errwrap"
 	"grapefruit/kit/jwtcase"
 	"net/http"
 	"strconv"
