@@ -182,7 +182,18 @@ const docTemplate = `{
             }
         },
         "do.LoginRsp": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "user_name": {
+                    "type": "string"
+                }
+            }
         },
         "do.RegisterReq": {
             "type": "object",
