@@ -20,6 +20,7 @@ var (
 	Company *company
 	Job     *job
 	Resume  *resume
+	Token   *token
 	User    *user
 )
 
@@ -28,6 +29,7 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	Company = &Q.Company
 	Job = &Q.Job
 	Resume = &Q.Resume
+	Token = &Q.Token
 	User = &Q.User
 }
 
@@ -37,6 +39,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		Company: newCompany(db, opts...),
 		Job:     newJob(db, opts...),
 		Resume:  newResume(db, opts...),
+		Token:   newToken(db, opts...),
 		User:    newUser(db, opts...),
 	}
 }
@@ -47,6 +50,7 @@ type Query struct {
 	Company company
 	Job     job
 	Resume  resume
+	Token   token
 	User    user
 }
 
@@ -58,6 +62,7 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		Company: q.Company.clone(db),
 		Job:     q.Job.clone(db),
 		Resume:  q.Resume.clone(db),
+		Token:   q.Token.clone(db),
 		User:    q.User.clone(db),
 	}
 }
@@ -76,6 +81,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		Company: q.Company.replaceDB(db),
 		Job:     q.Job.replaceDB(db),
 		Resume:  q.Resume.replaceDB(db),
+		Token:   q.Token.replaceDB(db),
 		User:    q.User.replaceDB(db),
 	}
 }
@@ -84,6 +90,7 @@ type queryCtx struct {
 	Company ICompanyDo
 	Job     IJobDo
 	Resume  IResumeDo
+	Token   ITokenDo
 	User    IUserDo
 }
 
@@ -92,6 +99,7 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		Company: q.Company.WithContext(ctx),
 		Job:     q.Job.WithContext(ctx),
 		Resume:  q.Resume.WithContext(ctx),
+		Token:   q.Token.WithContext(ctx),
 		User:    q.User.WithContext(ctx),
 	}
 }

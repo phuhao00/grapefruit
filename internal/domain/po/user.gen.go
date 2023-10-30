@@ -13,6 +13,9 @@ type User struct {
 	Pwd      string `gorm:"column:pwd" json:"pwd"`
 	Token    string `gorm:"column:token" json:"token"`
 	Category string `gorm:"column:category" json:"category"`
+	Email    string `gorm:"column:email" json:"email"`
+	Status   int32  `gorm:"column:status" json:"status"`
+	Role     int32  `gorm:"column:role" json:"role"`
 }
 
 // TableName User's table name

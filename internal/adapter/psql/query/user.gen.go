@@ -32,6 +32,9 @@ func newUser(db *gorm.DB, opts ...gen.DOOption) user {
 	_user.Pwd = field.NewString(tableName, "pwd")
 	_user.Token = field.NewString(tableName, "token")
 	_user.Category = field.NewString(tableName, "category")
+	_user.Email = field.NewString(tableName, "email")
+	_user.Status = field.NewInt32(tableName, "status")
+	_user.Role = field.NewInt32(tableName, "role")
 
 	_user.fillFieldMap()
 
@@ -47,6 +50,9 @@ type user struct {
 	Pwd      field.String
 	Token    field.String
 	Category field.String
+	Email    field.String
+	Status   field.Int32
+	Role     field.Int32
 
 	fieldMap map[string]field.Expr
 }
@@ -68,6 +74,9 @@ func (u *user) updateTableName(table string) *user {
 	u.Pwd = field.NewString(table, "pwd")
 	u.Token = field.NewString(table, "token")
 	u.Category = field.NewString(table, "category")
+	u.Email = field.NewString(table, "email")
+	u.Status = field.NewInt32(table, "status")
+	u.Role = field.NewInt32(table, "role")
 
 	u.fillFieldMap()
 
@@ -92,12 +101,15 @@ func (u *user) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (u *user) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 5)
+	u.fieldMap = make(map[string]field.Expr, 8)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["name"] = u.Name
 	u.fieldMap["pwd"] = u.Pwd
 	u.fieldMap["token"] = u.Token
 	u.fieldMap["category"] = u.Category
+	u.fieldMap["email"] = u.Email
+	u.fieldMap["status"] = u.Status
+	u.fieldMap["role"] = u.Role
 }
 
 func (u user) clone(db *gorm.DB) user {

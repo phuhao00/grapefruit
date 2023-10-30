@@ -11,6 +11,16 @@ import (
 	"os"
 )
 
+type DrawPosterParam struct {
+	QROffset     image.Point `json:"qr_offset"`
+	DingZiOffset image.Point `json:"ding_zi_offset"`
+	PhotoOffset  image.Point `json:"photo_offset"` //
+	Description  string      `json:"description"`  //描述
+	Font         string      `json:"font"`         //字体
+	Template     string      `json:"template"`     //模版
+	DPI          float64     `json:"dpi"`          //每英寸点数
+}
+
 func Poster(c *freetype.Context) (image.Image, error) {
 	var (
 		bgFile *os.File

@@ -1,12 +1,13 @@
 package config
 
 type Redis struct {
-	Host string `toml:"host"`
-	Port string `toml:"port"`
-	User string `toml:"user"`
-	Pwd  string `toml:"pwd"`
+	Host    string `toml:"host"`
+	Port    string `toml:"port"`
+	User    string `toml:"user"`
+	Pwd     string `toml:"pwd"`
+	CrtPath string `yaml:"crt_path"`
 }
 
-func (c *Config) GetRedisConfig() *Redis {
-	return c.Redis
+func GetRedisConfig() *Redis {
+	return config.Redis
 }

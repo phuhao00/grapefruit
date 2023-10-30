@@ -8,6 +8,6 @@ type ES struct {
 	Pwd              string `toml:"pwd"`
 }
 
-func (c *Config) GetESConfig() *ES {
-	return c.Es
+func GetESConfig() *ES {
+	return config.Es
 }

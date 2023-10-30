@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/nfnt/resize"
 	imgtype "github.com/shamsher31/goimgtype"
+	"github.com/skip2/go-qrcode"
 	"image"
 	"image/draw"
 	"image/png"

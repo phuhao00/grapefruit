@@ -89,3 +89,8 @@ func GormGenerateLoadConfig(filename string) (*Config, error) {
 	config = &c
 	return config, nil
 }
+
+func GetLabelVal(ctx context.Context) string {
+	env := os.Getenv("ENV")
+	return env
+}
