@@ -2,6 +2,9 @@
 
 Project grapefruit is a web backend ,this project can be use in chat gpt project 
 
+![](candidate_flow.drawio.png)
+![](employer.drawio.png)
+
 ## Features
 
 -  RPC.
