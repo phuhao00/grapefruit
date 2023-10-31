@@ -1,8 +1,9 @@
 # Project Grapefruit
 
-Project grapefruit is a web backend ,this project can be use in chat gpt project 
-
+Project grapefruit is a web backend of Three-Visits
+# candidate
 ![](candidate_flow.drawio.png)
+# employer
 ![](employer.drawio.png)
 
 ## Features
