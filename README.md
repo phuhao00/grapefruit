@@ -60,7 +60,7 @@ Project grapefruit is a web backend of Three-Visits
 - launch postgresql
 
 - create table and database
-- 
+
 ```sql
  execute  ./docs/script.sql
 ```
