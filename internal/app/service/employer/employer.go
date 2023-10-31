@@ -5,6 +5,11 @@ import "grapefruit/internal/domain/po"
 type Employer struct {
 }
 
+func (e *Employer) UpdateInfo(user *po.User) {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (e *Employer) AddResume(resume *po.Resume) {
 	//TODO implement me
 	panic("implement me")

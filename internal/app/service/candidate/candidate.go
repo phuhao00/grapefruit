@@ -7,6 +7,11 @@ import "grapefruit/internal/domain/po"
 type Candidate struct {
 }
 
+func (c *Candidate) UpdateInfo(user *po.User) {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (c *Candidate) PublishJob(job *po.Job) {
 	//TODO implement me
 	panic("implement me")
