@@ -23,7 +23,7 @@ func (s *Websocket) demoReadMessage() {
 				break
 			}
 		case <-tk.C:
-			demoMsgCh <- []byte("hello chat gpt")
+			demoMsgCh <- []byte("hello chatgpt gpt")
 		}
 	}
 }

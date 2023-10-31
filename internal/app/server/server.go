@@ -8,7 +8,7 @@ import (
 	"grapefruit/internal/adapter/psql"
 	"grapefruit/internal/adapter/routing"
 	"grapefruit/internal/app/service"
-	"grapefruit/internal/app/service/chat"
+	"grapefruit/internal/app/service/chatgpt"
 	"grapefruit/kit/log"
 	"grapefruit/kit/shutdown"
 	"time"
@@ -22,7 +22,7 @@ type Server struct {
 func NewServer() *Server {
 	r := gin.Default()
 	routing.Register(r)
-	eventSource := chat.NewEventSource()
+	eventSource := chatgpt.NewEventSource()
 	return &Server{
 		Router:      r,
 		chatService: eventSource,

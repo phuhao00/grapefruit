@@ -24,4 +24,5 @@ func Register(engine *gin.Engine) {
 	//
 	engine.POST("api/login", login.Login)
 	engine.POST("api/register", login.UserRegister)
+	//
 }

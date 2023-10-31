@@ -1,4 +1,4 @@
-package chat
+package chatgpt
 
 import (
 	"grapefruit/internal/adapter/eventsource"

@@ -1,4 +1,4 @@
-package chat
+package chatgpt
 
 import (
 	"github.com/gin-gonic/gin"
