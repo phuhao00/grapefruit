@@ -58,15 +58,13 @@ Project grapefruit is a web backend of Three-Visits
 
 ## Installation and Running
 - launch postgresql
-
 - create table and database
-
 ```sql
  execute  ./docs/script.sql
 ```
-
+- run
 ```shell
-	go run main.go
+  go run main.go
 ```
 ## Testing
 
