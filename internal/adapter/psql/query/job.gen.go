@@ -35,6 +35,9 @@ func newJob(db *gorm.DB, opts ...gen.DOOption) job {
 	_job.CompanyID = field.NewInt32(tableName, "company_id")
 	_job.Require = field.NewString(tableName, "require")
 	_job.Publiser = field.NewInt32(tableName, "publiser")
+	_job.Status = field.NewInt16(tableName, "status")
+	_job.DeletedAt = field.NewString(tableName, "deleted_at")
+	_job.UpdatedAt = field.NewString(tableName, "updated_at")
 
 	_job.fillFieldMap()
 
@@ -53,6 +56,9 @@ type job struct {
 	CompanyID field.Int32
 	Require   field.String // 职位要求
 	Publiser  field.Int32  // 发布职位的招聘者ID
+	Status    field.Int16  // 状态（1:开启；2.关闭）
+	DeletedAt field.String
+	UpdatedAt field.String
 
 	fieldMap map[string]field.Expr
 }
@@ -77,6 +83,9 @@ func (j *job) updateTableName(table string) *job {
 	j.CompanyID = field.NewInt32(table, "company_id")
 	j.Require = field.NewString(table, "require")
 	j.Publiser = field.NewInt32(table, "publiser")
+	j.Status = field.NewInt16(table, "status")
+	j.DeletedAt = field.NewString(table, "deleted_at")
+	j.UpdatedAt = field.NewString(table, "updated_at")
 
 	j.fillFieldMap()
 
@@ -101,7 +110,7 @@ func (j *job) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (j *job) fillFieldMap() {
-	j.fieldMap = make(map[string]field.Expr, 8)
+	j.fieldMap = make(map[string]field.Expr, 11)
 	j.fieldMap["id"] = j.ID
 	j.fieldMap["name"] = j.Name
 	j.fieldMap["desc"] = j.Desc
@@ -110,6 +119,9 @@ func (j *job) fillFieldMap() {
 	j.fieldMap["company_id"] = j.CompanyID
 	j.fieldMap["require"] = j.Require
 	j.fieldMap["publiser"] = j.Publiser
+	j.fieldMap["status"] = j.Status
+	j.fieldMap["deleted_at"] = j.DeletedAt
+	j.fieldMap["updated_at"] = j.UpdatedAt
 }
 
 func (j job) clone(db *gorm.DB) job {

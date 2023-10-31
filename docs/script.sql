@@ -7,8 +7,11 @@ create table "user"
     category varchar(20),
     email    varchar(100),
     status   integer,
-    role     integer
+    role     integer,
+    avatar   varchar(255)
 );
+
+comment on column "user".avatar is '头像(链接)';
 
 alter table "user"
     owner to grapefruit;
@@ -29,7 +32,10 @@ create table resume
     id         integer,
     phone      varchar(50),
     email      varchar(50) not null,
-    search_for varchar(255)
+    search_for varchar(255),
+    deleted_at time,
+    updated_at time,
+    status     smallint
 );
 
 comment on column resume.phone is '电话';
@@ -37,6 +43,8 @@ comment on column resume.phone is '电话';
 comment on column resume.email is '邮箱';
 
 comment on column resume.search_for is '求职职位';
+
+comment on column resume.status is '1.正常；2.删除';
 
 alter table resume
     owner to grapefruit;
@@ -50,7 +58,10 @@ create table job
     max_salary double precision,
     company_id integer,
     require    text,
-    publiser   integer
+    publiser   integer,
+    status     smallint,
+    deleted_at time,
+    updated_at time
 );
 
 comment on column job."desc" is '职位描述';
@@ -62,6 +73,8 @@ comment on column job.max_salary is '最高薪资';
 comment on column job.require is '职位要求';
 
 comment on column job.publiser is '发布职位的招聘者ID';
+
+comment on column job.status is '状态（1:开启；2.关闭）';
 
 alter table job
     owner to grapefruit;

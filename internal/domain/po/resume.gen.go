@@ -12,6 +12,9 @@ type Resume struct {
 	Phone     string `gorm:"column:phone;comment:电话" json:"phone"`             // 电话
 	Email     string `gorm:"column:email;not null;comment:邮箱" json:"email"`    // 邮箱
 	SearchFor string `gorm:"column:search_for;comment:求职职位" json:"search_for"` // 求职职位
+	DeletedAt string `gorm:"column:deleted_at" json:"deleted_at"`
+	UpdatedAt string `gorm:"column:updated_at" json:"updated_at"`
+	Status    int16  `gorm:"column:status;comment:1.正常；2.删除" json:"status"` // 1.正常；2.删除
 }
 
 // TableName Resume's table name

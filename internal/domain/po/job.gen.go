@@ -16,6 +16,9 @@ type Job struct {
 	CompanyID int32   `gorm:"column:company_id" json:"company_id"`
 	Require   string  `gorm:"column:require;comment:职位要求" json:"require"`         // 职位要求
 	Publiser  int32   `gorm:"column:publiser;comment:发布职位的招聘者ID" json:"publiser"` // 发布职位的招聘者ID
+	Status    int16   `gorm:"column:status;comment:状态（1:开启；2.关闭）" json:"status"`  // 状态（1:开启；2.关闭）
+	DeletedAt string  `gorm:"column:deleted_at" json:"deleted_at"`
+	UpdatedAt string  `gorm:"column:updated_at" json:"updated_at"`
 }
 
 // TableName Job's table name

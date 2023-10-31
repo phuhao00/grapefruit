@@ -57,8 +57,17 @@ Project grapefruit is a web backend of Three-Visits
     - MongoDB: Utilized for storing and querying unstructured data or complex data models.
 
 ## Installation and Running
+- launch postgresql
 
+- create table and database
+- 
+```sql
+ execute  ./docs/script.sql
+```
 
+```shell
+	go run main.go
+```
 ## Testing
 
 

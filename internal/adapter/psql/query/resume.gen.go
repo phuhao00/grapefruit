@@ -31,6 +31,9 @@ func newResume(db *gorm.DB, opts ...gen.DOOption) resume {
 	_resume.Phone = field.NewString(tableName, "phone")
 	_resume.Email = field.NewString(tableName, "email")
 	_resume.SearchFor = field.NewString(tableName, "search_for")
+	_resume.DeletedAt = field.NewString(tableName, "deleted_at")
+	_resume.UpdatedAt = field.NewString(tableName, "updated_at")
+	_resume.Status = field.NewInt16(tableName, "status")
 
 	_resume.fillFieldMap()
 
@@ -45,6 +48,9 @@ type resume struct {
 	Phone     field.String // 电话
 	Email     field.String // 邮箱
 	SearchFor field.String // 求职职位
+	DeletedAt field.String
+	UpdatedAt field.String
+	Status    field.Int16 // 1.正常；2.删除
 
 	fieldMap map[string]field.Expr
 }
@@ -65,6 +71,9 @@ func (r *resume) updateTableName(table string) *resume {
 	r.Phone = field.NewString(table, "phone")
 	r.Email = field.NewString(table, "email")
 	r.SearchFor = field.NewString(table, "search_for")
+	r.DeletedAt = field.NewString(table, "deleted_at")
+	r.UpdatedAt = field.NewString(table, "updated_at")
+	r.Status = field.NewInt16(table, "status")
 
 	r.fillFieldMap()
 
@@ -89,11 +98,14 @@ func (r *resume) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (r *resume) fillFieldMap() {
-	r.fieldMap = make(map[string]field.Expr, 4)
+	r.fieldMap = make(map[string]field.Expr, 7)
 	r.fieldMap["id"] = r.ID
 	r.fieldMap["phone"] = r.Phone
 	r.fieldMap["email"] = r.Email
 	r.fieldMap["search_for"] = r.SearchFor
+	r.fieldMap["deleted_at"] = r.DeletedAt
+	r.fieldMap["updated_at"] = r.UpdatedAt
+	r.fieldMap["status"] = r.Status
 }
 
 func (r resume) clone(db *gorm.DB) resume {
