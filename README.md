@@ -25,17 +25,18 @@ Project grapefruit is a web backend of Three-Visits
 ## Architecture Design
 
 - The project follows Domain-Driven Design (DDD) as the architectural design concept, dividing the business domain into different subdomains and implementing concepts like domain models, aggregates, entities, value objects, and domain services within each subdomain. 
-**cmd** 工具 
-**config** 配置，常量
-**docs** 文档，swagger 生成
-**internal** 主要逻辑
-- adapter 适配器
-- app 应用biz
-- domain 值对象
-**kit** 工具箱
-**script** devops 会用到的脚本
-- Dockerfile  构建容器的时候会用到
-- buildspec.yml aws 构建时会用到的
+
+### -[cmd 工具 
+### -[config 配置，常量
+### -[docs 文档，swagger 生成
+### -[internal 主要逻辑
+***-[adapter*** 适配器
+***-[app*** 应用biz
+***-[domain*** 值对象
+###  -[kit 工具箱
+###  -[script devops 会用到的脚本
+***-Dockerfile***  构建容器的时候会用到
+***-buildspec.yml*** aws 构建时会用到的
 
 
 ## Module Organization
