@@ -8,7 +8,9 @@ create table "user"
     email    varchar(100),
     status   integer,
     role     integer,
-    avatar   varchar(255)
+    avatar   varchar(255),
+    photos   text,
+    vlogs    text
 );
 
 comment on column "user".avatar is '头像(链接)';

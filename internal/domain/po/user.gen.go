@@ -17,6 +17,8 @@ type User struct {
 	Status   int32  `gorm:"column:status" json:"status"`
 	Role     int32  `gorm:"column:role" json:"role"`
 	Avatar   string `gorm:"column:avatar;comment:头像(链接)" json:"avatar"` // 头像(链接)
+	Photos   string `gorm:"column:photos" json:"photos"`
+	Vlogs    string `gorm:"column:vlogs" json:"vlogs"`
 }
 
 // TableName User's table name
