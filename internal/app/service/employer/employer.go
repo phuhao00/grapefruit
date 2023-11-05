@@ -10,7 +10,7 @@ import (
 type Employer struct {
 }
 
-func (e *Employer) UpdateInfo(user *po.User) {
+func (e *Employer) UpdateBaseInfo(user *po.User) {
 	psql.GetGormDB().WithContext(context.Background()).Updates(user)
 }
 

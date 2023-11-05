@@ -12,7 +12,27 @@ import (
 type Candidate struct {
 }
 
-func (c *Candidate) UpdateInfo(user *po.User) {
+func (c *Candidate) ShareIntroduction(user *po.User) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (c *Candidate) UpdateVlogs(user *po.User) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (c *Candidate) UpdatePhotos(user *po.User) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (c *Candidate) UpdateProject(user *po.User) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (c *Candidate) UpdateBaseInfo(user *po.User) {
 	psql.GetGormDB().WithContext(context.Background()).Updates(user)
 }
 
