@@ -7,6 +7,7 @@ import (
 	_ "grapefruit/docs"
 	"grapefruit/internal/adapter/routing/middleware"
 	"grapefruit/internal/app/usecase/login"
+	"grapefruit/internal/app/usecase/vlogs"
 	"net/http"
 )
 
@@ -25,4 +26,5 @@ func Register(engine *gin.Engine) {
 	engine.POST("api/login", login.Login)
 	engine.POST("api/register", login.UserRegister)
 	//
+	engine.POST("api/upload_vlog", vlogs.UpdateVlogs)
 }
