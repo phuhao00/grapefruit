@@ -2,6 +2,7 @@ package photos
 
 import (
 	"github.com/gin-gonic/gin"
+	"grapefruit/internal/app/service/uploadphoto"
 	"net/http"
 )
 
@@ -29,7 +30,7 @@ func UploadPhotos(c *gin.Context) {
 		return
 	}
 	defer src.Close()
-
+	uploadphoto.UploadPhotoService.S3UpLoadPhoto(src)
 	// 在这里可以对图片文件进行处理，例如保存到本地或进行其他操作
 
 	// 返回成功的响应
