@@ -10,8 +10,10 @@ import (
 	"net/http"
 )
 
-func UpdateVlogs(ctx *gin.Context) {
+func UploadVlogs(ctx *gin.Context) {
+
 	//todo 限制数量
+	//todo 传到s3
 	//todo update
 	file, err := ctx.FormFile("video")
 	if err != nil {
@@ -77,8 +79,7 @@ func UpdateVlogs(ctx *gin.Context) {
 	fmt.Println("Upload successful!")
 }
 
-func UploadVlogs(ctx *gin.Context) {
+func UpdateVlogs(ctx *gin.Context) {
 	//todo 限制数量
-	//todo 传到s3
 	//todo update
 }
