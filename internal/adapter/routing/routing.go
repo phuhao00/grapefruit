@@ -29,4 +29,5 @@ func Register(engine *gin.Engine) {
 	//
 	engine.POST("api/upload_vlog", vlogs.UpdateVlogs)
 	engine.POST("api/upload_photo", photos.UploadPhotos)
+	//
 }
