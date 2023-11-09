@@ -99,3 +99,43 @@ create table token
 alter table token
     owner to grapefruit;
 
+create table project
+(
+    name         varchar(255),
+    begin_time   time,
+    end_time     time not null,
+    created_time time,
+    updated_time time,
+    skills       varchar(255),
+    works        varchar(255)
+);
+
+alter table project
+    owner to grapefruit;
+
+create table vlogs
+(
+    id           bigint,
+    url          varchar(255),
+    "desc"       varchar(255),
+    created_time time,
+    update_time  time,
+    like_times   bigint
+);
+
+alter table vlogs
+    owner to grapefruit;
+
+create table photos
+(
+    "Id"         bigint,
+    "desc"       varchar(255),
+    url          varchar(255),
+    updated_time time,
+    created_time time,
+    like_times   bigint
+);
+
+alter table photos
+    owner to grapefruit;
+

@@ -32,6 +32,9 @@ func main() {
 		g.GenerateModel("resume"),
 		g.GenerateModel("job"),
 		g.GenerateModel("token"),
+		g.GenerateModel("vlogs"),
+		g.GenerateModel("photos"),
+		g.GenerateModel("project"),
 	)
 	// Generate the code
 	g.Execute()

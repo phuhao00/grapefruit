@@ -19,18 +19,24 @@ var (
 	Q       = new(Query)
 	Company *company
 	Job     *job
+	Photo   *photo
+	Project *project
 	Resume  *resume
 	Token   *token
 	User    *user
+	Vlog    *vlog
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	Company = &Q.Company
 	Job = &Q.Job
+	Photo = &Q.Photo
+	Project = &Q.Project
 	Resume = &Q.Resume
 	Token = &Q.Token
 	User = &Q.User
+	Vlog = &Q.Vlog
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
@@ -38,9 +44,12 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		db:      db,
 		Company: newCompany(db, opts...),
 		Job:     newJob(db, opts...),
+		Photo:   newPhoto(db, opts...),
+		Project: newProject(db, opts...),
 		Resume:  newResume(db, opts...),
 		Token:   newToken(db, opts...),
 		User:    newUser(db, opts...),
+		Vlog:    newVlog(db, opts...),
 	}
 }
 
@@ -49,9 +58,12 @@ type Query struct {
 
 	Company company
 	Job     job
+	Photo   photo
+	Project project
 	Resume  resume
 	Token   token
 	User    user
+	Vlog    vlog
 }
 
 func (q *Query) Available() bool { return q.db != nil }
@@ -61,9 +73,12 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		db:      db,
 		Company: q.Company.clone(db),
 		Job:     q.Job.clone(db),
+		Photo:   q.Photo.clone(db),
+		Project: q.Project.clone(db),
 		Resume:  q.Resume.clone(db),
 		Token:   q.Token.clone(db),
 		User:    q.User.clone(db),
+		Vlog:    q.Vlog.clone(db),
 	}
 }
 
@@ -80,27 +95,36 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		db:      db,
 		Company: q.Company.replaceDB(db),
 		Job:     q.Job.replaceDB(db),
+		Photo:   q.Photo.replaceDB(db),
+		Project: q.Project.replaceDB(db),
 		Resume:  q.Resume.replaceDB(db),
 		Token:   q.Token.replaceDB(db),
 		User:    q.User.replaceDB(db),
+		Vlog:    q.Vlog.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
 	Company ICompanyDo
 	Job     IJobDo
+	Photo   IPhotoDo
+	Project IProjectDo
 	Resume  IResumeDo
 	Token   ITokenDo
 	User    IUserDo
+	Vlog    IVlogDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
 		Company: q.Company.WithContext(ctx),
 		Job:     q.Job.WithContext(ctx),
+		Photo:   q.Photo.WithContext(ctx),
+		Project: q.Project.WithContext(ctx),
 		Resume:  q.Resume.WithContext(ctx),
 		Token:   q.Token.WithContext(ctx),
 		User:    q.User.WithContext(ctx),
+		Vlog:    q.Vlog.WithContext(ctx),
 	}
 }
 
