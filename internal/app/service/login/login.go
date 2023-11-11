@@ -25,9 +25,9 @@ func (l *_Login) Login(name, pwd string) error {
 	return tx.Error
 }
 
-func (l *_Login) Register(name, pwd string) error {
+func (l *_Login) Register(name, pwd, email string) error {
 	tableUser := GetUserTable()
-	user := &po.User{Name: name, Pwd: pwd}
+	user := &po.User{Name: name, Pwd: pwd, Email: email}
 	tx := tableUser.WithContext(context.Background()).Clauses().Create(user)
 	return tx.Error
 }

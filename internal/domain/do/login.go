@@ -2,9 +2,10 @@ package do
 
 import "sync"
 
+//{username: 'kaka', password: '123'}
 type LoginReq struct {
-	Name string `json:"name"`
-	Pwd  string `json:"pwd"`
+	Name string `json:"username"`
+	Pwd  string `json:"password"`
 }
 
 type LoginRsp struct {
@@ -14,8 +15,9 @@ type LoginRsp struct {
 }
 
 type RegisterReq struct {
-	Name string `json:"name"`
-	Pwd  string `json:"pwd"`
+	Name  string `json:"name"`
+	Pwd   string `json:"pwd"`
+	Email string `json:"email"`
 }
 
 type RegisterRsp struct {

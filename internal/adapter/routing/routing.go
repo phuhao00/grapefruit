@@ -8,6 +8,8 @@ import (
 	"grapefruit/internal/adapter/routing/middleware"
 	"grapefruit/internal/app/usecase/login"
 	"grapefruit/internal/app/usecase/photos"
+	"grapefruit/internal/app/usecase/project"
+	"grapefruit/internal/app/usecase/view"
 	"grapefruit/internal/app/usecase/vlogs"
 	"net/http"
 )
@@ -30,4 +32,8 @@ func Register(engine *gin.Engine) {
 	engine.POST("api/upload_vlog", vlogs.UpdateVlogs)
 	engine.POST("api/upload_photo", photos.UploadPhotos)
 	//
+	engine.POST("api/view", view.View)
+	//
+	engine.POST("api/project", project.UpdateProject)
+
 }

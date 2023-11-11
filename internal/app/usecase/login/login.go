@@ -49,7 +49,7 @@ func UserRegister(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	err := login.LoginService.Register(req.Name, req.Pwd)
+	err := login.LoginService.Register(req.Name, req.Pwd, req.Email)
 	if err != nil {
 		ctx.JSON(http.StatusOK, errwrap.DefaultFailedErr(err.Error()))
 	}
