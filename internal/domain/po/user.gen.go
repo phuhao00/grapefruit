@@ -19,6 +19,7 @@ type User struct {
 	Avatar   string `gorm:"column:avatar;comment:头像(链接)" json:"avatar"` // 头像(链接)
 	Photos   string `gorm:"column:photos" json:"photos"`
 	Vlogs    string `gorm:"column:vlogs" json:"vlogs"`
+	NickName string `gorm:"column:nick_name" json:"nick_name"`
 }
 
 // TableName User's table name

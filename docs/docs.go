@@ -173,10 +173,10 @@ const docTemplate = `{
         "do.LoginReq": {
             "type": "object",
             "properties": {
-                "name": {
+                "password": {
                     "type": "string"
                 },
-                "pwd": {
+                "username": {
                     "type": "string"
                 }
             }
@@ -198,6 +198,9 @@ const docTemplate = `{
         "do.RegisterReq": {
             "type": "object",
             "properties": {
+                "email": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
                 },

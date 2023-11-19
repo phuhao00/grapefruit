@@ -6,6 +6,7 @@ import (
 	"github.com/pelletier/go-toml/v2"
 	"io"
 	"os"
+	"sync"
 )
 
 type Config struct {
@@ -17,6 +18,18 @@ type Config struct {
 
 var config *Config
 
+var onceInitConfig sync.Once
+
+func GetConfig() *Config {
+
+	onceInitConfig.Do(func() {
+		///config todo init config
+	})
+
+	return config
+
+}
+
 func GetFileName(ctx context.Context) string {
 	env := GetEnv(ctx)
 	fileName := "dev.toml"
@@ -27,7 +40,7 @@ func GetFileName(ctx context.Context) string {
 		fileName = "prod.toml"
 	}
 	if env == "qa" {
-		fileName = "prod.toml"
+		fileName = "qa.toml"
 	}
 	return "./config/" + fileName
 }

@@ -16,12 +16,14 @@ func GetUserTable() (tx *gorm.DB) {
 var LoginService service.ILogin = &_Login{}
 
 type _Login struct {
+	LoginCounter int64
 }
 
 func (l *_Login) Login(name, pwd string) error {
 	tableUser := GetUserTable()
 	user := &po.User{}
 	tx := tableUser.WithContext(context.Background()).Where("name=? and pwd=?", name, pwd).Find(user)
+	l.LoginCounter++
 	return tx.Error
 }
 

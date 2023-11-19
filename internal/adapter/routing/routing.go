@@ -32,7 +32,7 @@ func Register(engine *gin.Engine) {
 	engine.POST("api/upload_vlog", vlogs.UpdateVlogs)
 	engine.POST("api/upload_photo", photos.UploadPhotos)
 	//
-	engine.POST("api/view", view.View)
+	engine.GET("api/view", view.View)
 	//
 	engine.POST("api/project", project.UpdateProject)
 

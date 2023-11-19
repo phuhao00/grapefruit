@@ -8,10 +8,11 @@ const TableNameCompany = "company"
 
 // Company mapped from table <company>
 type Company struct {
-	ID    int32  `gorm:"column:id" json:"id"`
-	Name  string `gorm:"column:name" json:"name"`
-	Desc  string `gorm:"column:desc" json:"desc"`
-	Scope int32  `gorm:"column:scope" json:"scope"`
+	ID      int32  `gorm:"column:id" json:"id"`
+	Name    string `gorm:"column:name" json:"name"`
+	Desc    string `gorm:"column:desc" json:"desc"`
+	Scope   int32  `gorm:"column:scope" json:"scope"`
+	Address string `gorm:"column:address" json:"address"`
 }
 
 // TableName Company's table name

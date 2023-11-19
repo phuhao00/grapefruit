@@ -45,7 +45,7 @@ func (s *Server) Run() {
 	go func() {
 		err := s.Router.Run(":8080")
 		if err != nil {
-			log.Error("[Run] errwrap:%v", err.Error())
+			panic(err.Error())
 		}
 	}()
 	//go func() {
@@ -65,7 +65,16 @@ func (s *Server) WaitSignal() {
 			if err := s.Shutdown(ctx); err != nil {
 				log.Error("server shutdown errwrap:%s", err.Error())
 			}
-		})
+		},
+		func() {
+			ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+			defer cancel()
+
+			if err := s.Shutdown(ctx); err != nil {
+				log.Error("server shutdown errwrap:%s", err.Error())
+			}
+		},
+	)
 }
 
 func (s *Server) Shutdown(ctx context.Context) error {

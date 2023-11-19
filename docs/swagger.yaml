@@ -1,9 +1,9 @@
 definitions:
   do.LoginReq:
     properties:
-      name:
+      password:
         type: string
-      pwd:
+      username:
         type: string
     type: object
   do.LoginRsp:
@@ -17,6 +17,8 @@ definitions:
     type: object
   do.RegisterReq:
     properties:
+      email:
+        type: string
       name:
         type: string
       pwd:

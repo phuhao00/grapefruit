@@ -162,10 +162,10 @@
         "do.LoginReq": {
             "type": "object",
             "properties": {
-                "name": {
+                "password": {
                     "type": "string"
                 },
-                "pwd": {
+                "username": {
                     "type": "string"
                 }
             }
@@ -187,6 +187,9 @@
         "do.RegisterReq": {
             "type": "object",
             "properties": {
+                "email": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
                 },
